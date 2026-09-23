@@ -6,7 +6,7 @@ echo "================================================="
 echo ""
 echo "[1/4] Gerekli paketler kontrol ediliyor..."
 pkg update -y
-pkg install -y python tsu curl ncurses-utils
+pkg install -y python tsu curl ncurses-utils git
 
 echo ""
 echo "[2/4] Hedef klasör oluşturuluyor..."
