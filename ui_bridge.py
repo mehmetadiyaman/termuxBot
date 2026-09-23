@@ -182,20 +182,12 @@ class UIBridge:
             logger.debug("Using cached XML (age: %.0fms)", self.cache.age_ms)
             return self.cache.xml
 
-        # Dump komutunu çalıştır (ADB shell üzerinden)
-        result = self.runner.run(
-            f"adb shell uiautomator dump {self.dump_path}",
+        # Dump komutunu çalıştır (Root shell üzerinden)
+        result = self.runner.run_root(
+            f"uiautomator dump {self.dump_path}",
             timeout=DUMP_TIMEOUT,
             retries=2,
         )
-
-        if not result.success:
-            # Fallback: direkt uiautomator dene
-            result = self.runner.run_root(
-                f"uiautomator dump {self.dump_path}",
-                timeout=DUMP_TIMEOUT,
-                retries=1,
-            )
 
         if not result.success:
             logger.error(
@@ -205,19 +197,11 @@ class UIBridge:
             return None
 
         # XML dosyasını oku
-        read_result = self.runner.run(
-            f"adb shell cat {self.dump_path}",
+        read_result = self.runner.run_root(
+            f"cat {self.dump_path}",
             timeout=5.0,
-            retries=1,
+            retries=2,
         )
-
-        if not read_result.success or not read_result.output:
-            # Fallback: direkt cat
-            read_result = self.runner.run_root(
-                f"cat {self.dump_path}",
-                timeout=5.0,
-                retries=1,
-            )
 
         if not read_result.success or not read_result.output:
             logger.error("Failed to read dump file at %s", self.dump_path)
