@@ -22,33 +22,10 @@ git clone https://github.com/mehmetadiyaman/termuxBot.git termuxBot
 cd termuxBot
 
 echo ""
-echo "[4/4] Termux:Widget kısayolları ayarlanıyor..."
-mkdir -p ~/.shortcuts/tasks
-
-# Botu Başlat kısayolu
-cat << 'EOF' > ~/.shortcuts/Botu_Baslat.sh
-#!/bin/bash
-cd ~/termuxBot
-clear
-echo "🚀 Viewpoints Bot Başlatılıyor..."
-python bot.py
-EOF
-
-# Hesap Menüsü kısayolu
-cat << 'EOF' > ~/.shortcuts/Hesap_Menusu.sh
-#!/bin/bash
-cd ~/termuxBot
-clear
-python accounts.py
-EOF
-
-# İzinleri ver
-chmod +x ~/.shortcuts/*.sh
-
-echo ""
 echo "================================================="
 echo "✅ Kurulum Başarıyla Tamamlandı!"
 echo "================================================="
-echo "Ana ekranınıza 'Termux:Widget' ekleyerek"
-echo "'Botu_Baslat' butonuna tıklayabilirsiniz."
-echo "================================================="
+echo "Bot başlatılıyor..."
+echo ""
+
+python bot.py
